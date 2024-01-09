@@ -132,6 +132,17 @@ class LinkedList {
     }
     return -1;
   }
+  reverse() {
+    let prev = null;
+    let curr = this.head;
+    while (curr) {
+      let next = curr.next;
+      curr.next = prev;
+      prev = curr;
+      curr = next;
+    }
+    this.head = prev;
+  }
 }
 const list = new LinkedList();
 // console.log(list.isEmpty());
@@ -140,11 +151,14 @@ list.append(10);
 list.append(20);
 list.append(30);
 list.append(40);
+console.log("Before revserving");
 list.print();
-console.log("##############");
+
 // list.insert(25, 2);
 // list.removeFrom(2);
 // list.removeValue(45);
+list.reverse();
+console.log("after revserving");
 list.print();
 
-list.search(30);
+// list.search(30);
