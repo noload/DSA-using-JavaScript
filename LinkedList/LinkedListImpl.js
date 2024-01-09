@@ -53,12 +53,55 @@ class LinkedList {
     }
     this.size++;
   }
+
+  insert(value, index) {
+    if (index < 0 || index > this.size) {
+      return;
+    }
+    if (index === 0) {
+      this.prepend(value);
+    } else {
+      const newNode = new Node(value);
+      let prev = this.head;
+      for (let i = 0; i < index - 1; i++) {
+        prev = prev.next;
+      }
+      newNode.next = prev.next;
+      prev.next = newNode;
+      this.size++;
+    }
+  }
+
+  removeFrom(index) {
+    if (index < 0 || index > this.size) {
+      console.log("Invalid index");
+      return;
+    }
+    let removedNode;
+    if (index === 0) {
+      removedNode = this.head;
+      this.head = this.head.next;
+    } else {
+      let prev = this.head;
+      for (let i = 0; i < index - 1; i++) {
+        prev = prev.next;
+      }
+      removedNode = prev.next;
+      prev.next = prev.next.next;
+    }
+    this.size--;
+    return removedNode;
+  }
 }
 const list = new LinkedList();
 // console.log(list.isEmpty());
 // console.log(list.getSize());
-list.prepend(10);
-list.prepend(20);
-list.prepend(30);
+list.append(10);
+list.append(20);
+list.append(30);
 list.append(40);
+list.print();
+console.log("##############");
+// list.insert(25, 2);
+list.removeFrom(2);
 list.print();
