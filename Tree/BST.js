@@ -92,6 +92,22 @@ class BinarySearchTree {
       }
     }
   }
+
+  min(root) {
+    if (!root.left) {
+      return root.value;
+    } else {
+      return this.min(root.left);
+    }
+  }
+
+  max(root) {
+    if (!root.right) {
+      return root.value;
+    } else {
+      return this.max(root.right);
+    }
+  }
 }
 
 const bst = new BinarySearchTree();
@@ -102,14 +118,17 @@ bst.insert(15);
 bst.insert(3);
 bst.insert(7);
 
+console.log(bst.min(bst.root));
+console.log(bst.max(bst.root));
+
 // console.log(bst.search(bst.root, 30));
 // console.log(bst.search(bst.root, 20));
 // console.log(bst.search(bst.root, 10));
 // console.log(bst.search(bst.root, 40));
-bst.preOrder(bst.root);
-console.log("*************************");
-bst.inOrder(bst.root);
-console.log("*************************");
-bst.postOrder(bst.root);
-console.log("*************************");
-bst.levelOrder();
+// bst.preOrder(bst.root);
+// console.log("*************************");
+// bst.inOrder(bst.root);
+// console.log("*************************");
+// bst.postOrder(bst.root);
+// console.log("*************************");
+// bst.levelOrder();
