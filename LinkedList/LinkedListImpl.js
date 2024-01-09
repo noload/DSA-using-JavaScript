@@ -114,6 +114,24 @@ class LinkedList {
       console.log("Node not present with given value");
     }
   }
+
+  search(value) {
+    if (this.isEmpty()) {
+      console.log("List is empty");
+      return;
+    }
+    let curr = this.head;
+
+    let i = 0;
+    while (curr) {
+      if (curr.value === value) {
+        return i;
+      }
+      i++;
+      curr = curr.next;
+    }
+    return -1;
+  }
 }
 const list = new LinkedList();
 // console.log(list.isEmpty());
@@ -126,5 +144,7 @@ list.print();
 console.log("##############");
 // list.insert(25, 2);
 // list.removeFrom(2);
-list.removeValue(45);
+// list.removeValue(45);
 list.print();
+
+list.search(30);
