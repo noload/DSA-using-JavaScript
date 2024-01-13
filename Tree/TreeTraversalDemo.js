@@ -52,42 +52,42 @@ class TreeStructure {
     this.insert(this.root, newValue);
   }
 
-  deleteNode(root, value) {
+  // deleteNode(root, value) {
+  //   if (root === null) {
+  //     return null;
+  //   }
+  //   if (value < root.value) {
+  //     root.leftChild =this.deleteNode(root)
+  //   }
+  //   else if(value > root.value){
+  //     root.rightChild = this.deleteNode()
+  //   }
+  // }
+
+  deletenode(root, value) {
     if (root === null) {
       return null;
     }
     if (value < root.value) {
-      root.leftChild =this.deleteNode(root)
-    }
-    else if(value > root.value){
-      root.rightChild = this.deleteNode()
-    }
-  }
-
-  deletenode(root,value){
-    if (root===null){
-      return null;
-    }
-    if (value<root.value){
-      root.left=this.deletenode(root.left,value)
-    }else if (value>root.value){
-      root.right=this.deletenode(root.right,value)
-    }else{
-      if (!root.left && !root.right){
+      root.leftChild = this.deletenode(root.leftChild, value);
+    } else if (value > root.value) {
+      root.rightChild = this.deletenode(root.rightChild, value);
+    } else {
+      if (!root.leftChild && !root.rightChild) {
         return null;
       }
-      if(!root.left){
-        return root.right;
-      }elseif (!root.right){
-        return root.left
+      if (!root.leftChild) {
+        return root.rightChild;
+      } else if (!root.rightChild) {
+        return root.leftChild;
       }
-      root.value= this.min(root.right)
-      root.right= this.deletenode(root.right,root.value)
+      root.value = this.min(root.rightChild);
+      root.rightChild = this.deletenode(root.rightChild, root.value);
     }
     return root;
   }
-  deletebst(value){
-    this.root=this.deletenode(this.root,value)
+  deletebst(value) {
+    this.root = this.deletenode(this.root, value);
   }
 }
 
