@@ -74,5 +74,74 @@ class LinkedList {
     }
     return temp;
   }
+
+  get(index) {
+    // if (!this.head) {
+    //   return undefined;
+    // }
+    // let i = 0;
+    // let temp = this.head;
+    // while (temp.next) {
+    //   if (i == index) {
+    //     return temp;
+    //   }
+    //   i++;
+    //   temp = temp.next;
+    // }
+
+    if (index < 0 || index >= this.length) return undefined;
+    let temp = this.head;
+    for (let i = 0; i < index; i++) {
+      temp = temp.next;
+    }
+    return temp;
+  }
+
+  set(index, value) {
+    // if (index < 0 || index >= this.length) return undefined;
+    // let temp = this.head;
+    // for (let i = 0; i < index; i++) {
+    //   temp = temp.next;
+    // }
+    // temp.value = value;
+    // return this;
+
+    let temp = this.get(index);
+    if (temp) {
+      temp.value = value;
+      return true;
+    }
+    return false;
+  }
+
+  insert(index, value) {
+    // const newNode = Node(value);
+    // if (index < 0 || index > this.length) {
+    //   return undefined;
+    // }
+    // if (index === 0) {
+    //   return this.unshift(value);
+    // }
+    // if (index == this.length) {
+    //   return this.push(value);
+    // }
+    // let temp = this.head;
+    // for (let i = 0; i < index - 1; i++) {
+    //   temp = temp.next;
+    // }
+    // newNode.next = temp.next;
+    // temp.next = newNode;
+
+    if (index === 0) return this.unshift(value);
+    if (index === this.length) return this.push(value);
+    if (index < 0 || index > this.length) return false;
+
+    const newNode = new Node(value);
+    const temp = this.get(index - 1);
+    newNode.next = temp.next;
+    temp.next = newNode;
+    this.length++;
+    return true;
+  }
 }
 list = new LinkedList(10);
