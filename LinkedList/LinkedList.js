@@ -13,6 +13,7 @@ class LinkedList {
     this.length = 1;
   }
 
+  //add node to end of the linked list
   push(value) {
     const newNode = Node(value);
     if (!this.head) {
@@ -26,6 +27,7 @@ class LinkedList {
     return this;
   }
 
+  //remove node from end  of linked list
   pop() {
     if (!this.head) return undefined;
 
@@ -45,6 +47,32 @@ class LinkedList {
     }
     return temp;
   }
-}
 
+  unshift(value) {
+    const newNode = Node(value);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      newNode.next = this.head;
+      this.head = newNode;
+    }
+    this.length++;
+    return this;
+  }
+
+  shift() {
+    if (!this.head) {
+      return undefined;
+    }
+    let temp = this.head;
+    this.head = this.head.next;
+    this.length--;
+    temp.next = null;
+    if (this.length == 0) {
+      this.tail = null;
+    }
+    return temp;
+  }
+}
 list = new LinkedList(10);
