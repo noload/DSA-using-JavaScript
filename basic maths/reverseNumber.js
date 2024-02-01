@@ -8,4 +8,11 @@ function reverseNumber(n) {
   return reverse;
 }
 
+function reverseNumber2(n) {
+  let number = n.toString().split("").reverse().join("");
+  console.log(number);
+}
+
 console.log(reverseNumber(7956));
+
+reverseNumber2(10093)
