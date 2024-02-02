@@ -15,4 +15,4 @@ function reverseNumber2(n) {
 
 console.log(reverseNumber(7956));
 
-reverseNumber2(10093)
+reverseNumber2(10093);
