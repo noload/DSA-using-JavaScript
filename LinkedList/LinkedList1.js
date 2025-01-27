@@ -163,10 +163,29 @@ class LinkedList {
     }
     this.head = prev
   }
+
+  removeNthNodeFromEnd(n){
+    let slow = this.head;
+    let fast = this.head;
+    for(let  i=1;i<=n;i++){
+      fast = fast.next
+    }
+
+    while (fast.next != null) {
+      fast=fast.next;
+      slow=slow.next;
+    }
+
+    slow.next = slow.next.next;
+
+  }
 }
 
 const list = new LinkedList();
-list.addMultiple([10, 20,30,40,50], "last");
+list.addMultiple([10, 20,30,40,50,60,70,80], "last");
 list.print()
-list.reverse()
+// list.reverse()
+// list.print()
+list.removeNthNodeFromEnd(3)
 list.print()
+                  
