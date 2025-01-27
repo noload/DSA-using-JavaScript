@@ -2,7 +2,7 @@ class Node {
   constructor(value) {
     this.value = value;
     this.next = null;
-    this.position = ["first","last"]
+    this.position = ["first", "last"];
   }
 }
 
@@ -35,11 +35,10 @@ class LinkedList {
   print() {
     let cur = this.head;
     while (cur != null) {
-      process.stdout.write(`${cur.value} --> `)
+      process.stdout.write(`${cur.value} --> `);
       cur = cur.next;
     }
-    process.stdout.write(`null \n`)
-
+    process.stdout.write(`null \n`);
   }
   size() {
     let count = 0;
@@ -70,56 +69,92 @@ class LinkedList {
     return;
   }
 
-  removeLast(){
+  removeLast() {
     if (!this.head) {
-      throw new Error("not valid operation")
+      throw new Error("not valid operation");
     }
     if (this.size() === 1) {
-      this.head = null
+      this.head = null;
     }
     let cur = this.head;
-    while(cur.next.next){
-      cur =  cur.next;
+    while (cur.next.next) {
+      cur = cur.next;
     }
     cur.next = null;
   }
-  
-  addMultiple(values,position,index =  0){
+
+  addMultiple(values, position, index = 0) {
     if (position == "first") {
-      for(let val of values){
-        this.addFirst(val)
+      for (let val of values) {
+        this.addFirst(val);
       }
-    }else if(position == "last"){
-      for(let val of values){
-        this.addLast(val)
+    } else if (position == "last") {
+      for (let val of values) {
+        this.addLast(val);
       }
-    }else if(position == "index"){
-      if (index >  this.size()) {
+    } else if (position == "index") {
+      if (index > this.size()) {
         return -1;
       }
-      for(let i = 0 ; i < values.length;i++){
-        this.addAt(index + 1,values[i])
+      for (let i = 0; i < values.length; i++) {
+        this.addAt(index + 1, values[i]);
       }
     }
   }
 
-  removeFirst(){
+  removeFirst() {
     if (!this.head) {
-      throw new Error("not valid operation")
+      throw new Error("not valid operation");
     }
     if (this.size() === 1) {
-      this.head = null
+      this.head = null;
     }
-    this.head = this.head.next
-
+    this.head = this.head.next;
+  }
+  remove(index) {
+    if (index < 0 || index > this.size()) {
+      console.log("invalid index");
+      return;
+    }
+    let cur = this.head;
+    for (let i = 1; i < index - 1; i++) {
+      cur = cur.next;
+    }
+    cur.next = cur.next.next;
   }
 
+  isPallindrom() {
+    // let str1 = [];
+    let  strin1 ="";
+    let strin2  ="";
+    let cur = this.head;
+    while (cur != null) {
+  
+      // str1.push(cur.value)
+      strin1 =`${strin1}${cur.value}`
+      strin2 =`${cur.value}${strin2}`
+      cur = cur.next;
+    }
+
+    // let i = 0;
+    // let j = this.size()-1;
+    // while (i < j) {
+    //   if (str1[i] != str1[j]) {
+    //     return false
+    //   }
+    //   i++;
+    //   j--;
+    // }
+    
+    
+    // return true;
+
+    return strin1 == strin2;
+   
+  }
 }
 
 const list = new LinkedList();
-
-list.addMultiple([10,20,30,40],"last")
-
+list.addMultiple([10, 20, 20, 10], "last");
 list.print()
-list.removeFirst()
-list.print()
+console.log(list.isPallindrom());
