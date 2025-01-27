@@ -152,9 +152,21 @@ class LinkedList {
     return strin1 == strin2;
    
   }
+  reverse(){
+    let prev =  null;
+    let cur = this.head;
+    while (cur != null) {
+      const nextNode = cur.next
+      cur.next = prev;
+      prev = cur
+      cur = nextNode
+    }
+    this.head = prev
+  }
 }
 
 const list = new LinkedList();
-list.addMultiple([10, 20, 20, 10], "last");
+list.addMultiple([10, 20,30,40,50], "last");
 list.print()
-console.log(list.isPallindrom());
+list.reverse()
+list.print()
