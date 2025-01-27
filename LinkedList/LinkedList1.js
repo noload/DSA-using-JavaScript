@@ -2,6 +2,7 @@ class Node {
   constructor(value) {
     this.value = value;
     this.next = null;
+    this.position = ["first","last"]
   }
 }
 
@@ -13,7 +14,7 @@ class LinkedList {
   addFirst(value) {
     const newNode = new Node(value);
     newNode.next = this.head;
-    this.head = newNode
+    this.head = newNode;
   }
 
   addLast(value) {
@@ -28,53 +29,97 @@ class LinkedList {
       current = current.next;
     }
     current.next = node;
-    return
+    return;
   }
 
-  size(){
-    let count = 0
-    let cur = this.head
+  print() {
+    let cur = this.head;
     while (cur != null) {
-        count++;
-        cur = cur.next;
+      process.stdout.write(`${cur.value} --> `)
+      cur = cur.next;
+    }
+    process.stdout.write(`null \n`)
+
+  }
+  size() {
+    let count = 0;
+    let cur = this.head;
+    while (cur != null) {
+      count++;
+      cur = cur.next;
     }
     return count;
   }
-  addAt(index,value){
-    const node  = new Node(value)
+  addAt(index, value) {
+    const node = new Node(value);
     if (index < 0 || index > this.size()) {
-        throw new Error("Index out of bound")
-        
+      throw new Error("Index out of bound");
     }
 
     if (index == 0) {
-       this.addFirst(value) 
-       return;
+      this.addFirst(value);
+      return;
     }
 
-    let cur =  this.head;
-    for(let i = 1 ; i < index - 1;i++){
-        cur=cur.next;
+    let cur = this.head;
+    for (let i = 1; i < index - 1; i++) {
+      cur = cur.next;
     }
     node.next = cur.next;
     cur.next = node;
     return;
   }
-}               
 
-const list =  new LinkedList();
+  removeLast(){
+    if (!this.head) {
+      throw new Error("not valid operation")
+    }
+    if (this.size() === 1) {
+      this.head = null
+    }
+    let cur = this.head;
+    while(cur.next.next){
+      cur =  cur.next;
+    }
+    cur.next = null;
+  }
+  
+  addMultiple(values,position,index =  0){
+    if (position == "first") {
+      for(let val of values){
+        this.addFirst(val)
+      }
+    }else if(position == "last"){
+      for(let val of values){
+        this.addLast(val)
+      }
+    }else if(position == "index"){
+      if (index >  this.size()) {
+        return -1;
+      }
+      for(let i = 0 ; i < values.length;i++){
+        this.addAt(index + 1,values[i])
+      }
+    }
+  }
 
-list.addLast(20)
-list.addLast(30)
-list.addLast(40)
-list.addLast(60)
-list.addLast(80)
-list.addAt(3, 35)
+  removeFirst(){
+    if (!this.head) {
+      throw new Error("not valid operation")
+    }
+    if (this.size() === 1) {
+      this.head = null
+    }
+    this.head = this.head.next
 
-let cur = list.head
-while (cur != null) {
-    console.log(cur.value);
-    cur = cur.next;
+  }
+
 }
-console.log(list.size())
 
+const list = new LinkedList();
+
+list.addMultiple([10,20,30,40],"last")
+
+list.print()
+list.removeFirst()
+list.print()
