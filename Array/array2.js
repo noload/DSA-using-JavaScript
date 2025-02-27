@@ -33,7 +33,7 @@ function removeDuplicate(arr) {
     j++;
   }
 
-  return { i: i + 1, arr:arr.slice(0,i+1) };
+  return { i: i + 1, arr: arr.slice(0, i + 1) };
 }
 
 console.log(removeDuplicate(arr));
